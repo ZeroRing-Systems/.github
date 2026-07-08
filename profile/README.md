@@ -1,22 +1,65 @@
-# ⚡ ZeroRing-Systems
+<div align="center">
+  <h1>🪐 ZeroRing OS</h1>
+  <p><strong>The full-stack, WebAssembly-powered micro-kernel operating system for the web.</strong></p>
+</div>
 
-Welcome to the official organization profile for **Project ZeroRing**, an experimental systems architecture R&D initiative. 
+<div align="center">
+  <!-- TODO: Replace with the actual URL to your uploaded GIF demo -->
+  <img src="demo.gif" alt="ZeroRing Terminal Demo" width="800" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);"/>
+</div>
 
-### 🪐 The Mission
-We are engineering a highly experimental **Cloud-Backed WebAssembly (WASM) Operating System**. 
+<br/>
 
-The goal of this architecture is to bridge bare-metal systems programming with modern web infrastructure. We are tricking the browser's V8 execution engine into acting as a bare-metal CPU and RAM, while offloading all hardware-level system calls (file I/O, networking) to a persistent C++ cloud backend.
+## 🪐 What is ZeroRing?
 
-### 🏗️ Core Architecture
-The ecosystem is strictly decoupled into distinct operational boundaries:
+ZeroRing is a persistent, fully functional virtual operating system designed to run entirely within your web browser at near-native speeds. 
 
-* **[`ZeroKernel`](https://github.com/ZeroRing-Systems/ZeroKernel):** The brain. A pure, freestanding C++ OS kernel. It is compiled entirely to WebAssembly and contains zero browser-specific dependencies or standard library calls.
-* **[`ZeroRing-Cloud`](https://github.com/ZeroRing-Systems/ZeroRing-Cloud):** The hardware abstraction. This repository houses both the frontend JavaScript interop bridge (acting as the BIOS/Display) and the C++ WebSocket server (acting as the Hard Drive and Network).
+Built from the ground up, ZeroRing features a custom C++ kernel compiled to WebAssembly (WASM), communicating with a zero-dependency C++ backend via WebSockets. It includes a complete persistent virtual filesystem (VFS) backed by PostgreSQL and supports sandboxed Python execution directly from the shell.
 
-### 🛠️ Tech Stack
-* **Kernel Engine:** Pure C++ (Compiled via Emscripten)
-* **Backend Server:** C++ (Boost.Beast) / WebSockets
-* **Virtual File System:** PostgreSQL 
-* **Build System:** CMake
+## ✨ Key Features
 
-> *"The kernel must never know whether it is running in a browser or on real hardware. That decision lives entirely in the Hardware Abstraction Layer."*
+- **⚡ Blazing Fast WASM Kernel**: A minimalist, custom-built C++ kernel compiled directly to WebAssembly for native-like browser execution.
+- **💾 Persistent VFS**: Multi-user isolated filesystem backed by PostgreSQL. Your files, directories, and scripts persist across browser sessions.
+- **📝 Built-in UI Editor**: A beautiful integrated code editor (`edit <filename>`) overlaid directly onto the terminal for writing multi-line scripts.
+- **🐍 Sandboxed Execution**: Write and execute Python scripts (`run <filename>`) dynamically on the server directly from your browser terminal.
+- **🔌 Zero-Dependency C++ Backend**: A highly concurrent, ultra-low latency WebSocket proxy server built from scratch with standard POSIX sockets.
+
+## 🚀 Quick Start
+
+ZeroRing is containerized and orchestrated via Docker Compose, making deployment incredibly easy.
+
+```bash
+# Clone the orchestration repository and its submodules
+git clone --recurse-submodules https://github.com/ZeroRing-Systems/ZeroRing-Deploy.git
+cd ZeroRing-Deploy
+
+# Build and start the cluster
+sudo docker compose up --build
+```
+Navigate to `http://localhost:8080` in your browser to view the landing page and launch the terminal!
+
+## 💻 Available Commands
+
+| Command | Description |
+|---|---|
+| `edit <file>` | Open the integrated text editor UI |
+| `run <file>` | Execute a Python script in the sandbox |
+| `cd <path>` | Change the current working directory |
+| `ls [path]` | List contents of a directory |
+| `mkdir <path>` | Create a new directory |
+| `rm <path>` | Remove a file or empty directory |
+| `write <f> <d>`| Quickly write data to a file inline |
+| `cat <file>` | Print file contents to the terminal |
+| `help`, `pwd` | Standard system utilities |
+
+## 🏗️ Architecture
+
+ZeroRing is split across three primary repositories to ensure strict modularity:
+
+1. **[ZeroKernel](https://github.com/ZeroRing-Systems/ZeroKernel)**: The core C++ codebase compiled to WebAssembly. Handles tokenization, command dispatching, path resolution, and JSON packet formatting.
+2. **[ZeroRing-Cloud](https://github.com/ZeroRing-Systems/ZeroRing-Cloud)**: The frontend HTML/JS interface and the concurrent C++ WebSocket backend server.
+3. **[ZeroRing-Deploy](https://github.com/ZeroRing-Systems/ZeroRing-Deploy)**: The umbrella repository orchestrating the Docker multi-stage builds, PostgreSQL database initialization, and NGINX routing.
+
+## 🤝 Contributing
+
+We welcome contributions! Please feel free to submit a Pull Request or open an issue on any of the sub-repositories to help us build the ultimate browser OS.
