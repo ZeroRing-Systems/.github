@@ -4,8 +4,7 @@
 </div>
 
 <div align="center">
-  <!-- TODO: Replace with the actual URL to your uploaded GIF demo -->
-  <img src="ZeroRing.gif" alt="ZeroRing Terminal Demo" width="800" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);"/>
+  <img src="https://raw.githubusercontent.com/ZeroRing-Systems/.github/main/profile/ZeroRing.gif" alt="ZeroRing Terminal Demo" width="800" style="border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.5);"/>
 </div>
 
 <br/>
